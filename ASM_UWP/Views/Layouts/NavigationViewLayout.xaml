@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="ASM_UWP.Views.Layout.NavigationViewLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ASM_UWP.Views.Layout"
+    xmlns:models="using:ASM_UWP.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <NavigationView
+            x:Name="bodyWrapper" 
+            ItemInvoked="BodyWrapper_ItemInvoked" 
+            Loaded="BodyWrapper_Loaded"
+            IsPaneOpen="False"
+            IsBackButtonVisible="Collapsed"
+            MenuItemsSource="{x:Bind ViewModel.Categories}">
+            <NavigationView.MenuItemTemplate>
+                <DataTemplate x:DataType="models:Category">
+                    <NavigationViewItem Icon="{Binding Icon}" Content="{Binding Name}" Tag="{Binding ID}" />
+                </DataTemplate>
+            </NavigationView.MenuItemTemplate>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="titleArchivePost" Width="200" VerticalAlignment="Center" Padding="20,0,0,0"/>
+                    <SearchBox x:Name="inputSearchBox" Width="400" QuerySubmitted="inputSearchBox_Submitted"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <Frame x:Name="bodyContent"></Frame>
+                </StackPanel>
+            </Grid>
+        </NavigationView>
+    </Grid>
+</Page>
